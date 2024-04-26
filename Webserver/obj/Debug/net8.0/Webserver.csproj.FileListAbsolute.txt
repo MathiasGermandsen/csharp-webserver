@@ -1,0 +1,14 @@
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/bin/Debug/net8.0/Webserver
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/bin/Debug/net8.0/Webserver.deps.json
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/bin/Debug/net8.0/Webserver.runtimeconfig.json
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/bin/Debug/net8.0/Webserver.dll
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/bin/Debug/net8.0/Webserver.pdb
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/Debug/net8.0/Webserver.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/Debug/net8.0/Webserver.AssemblyInfoInputs.cache
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/Debug/net8.0/Webserver.AssemblyInfo.cs
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/Debug/net8.0/Webserver.csproj.CoreCompileInputs.cache
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/Debug/net8.0/Webserver.dll
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/Debug/net8.0/refint/Webserver.dll
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/Debug/net8.0/Webserver.pdb
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/Debug/net8.0/Webserver.genruntimeconfig.cache
+/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/Debug/net8.0/ref/Webserver.dll
