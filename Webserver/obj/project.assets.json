@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/Webserver.csproj",
+      "projectUniqueName": "/Users/mathias.germandsen/Desktop/csharp-webserver/Webserver/Webserver.csproj",
       "projectName": "Webserver",
-      "projectPath": "/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/Webserver.csproj",
+      "projectPath": "/Users/mathias.germandsen/Desktop/csharp-webserver/Webserver/Webserver.csproj",
       "packagesPath": "/Users/mathias.germandsen/.nuget/packages/",
-      "outputPath": "/Users/mathias.germandsen/Desktop/CCNA-projekt-webapp/Webserver/obj/",
+      "outputPath": "/Users/mathias.germandsen/Desktop/csharp-webserver/Webserver/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mathias.germandsen/.nuget/NuGet/NuGet.Config"
