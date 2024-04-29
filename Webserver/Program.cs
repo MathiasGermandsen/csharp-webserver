@@ -57,20 +57,47 @@ public class HttpServer : IHttpServer
       if (incomingMessage.StartsWith("POST"))
       {
         var inputs = incomingMessage.Split(new[] { "\r\n" }, StringSplitOptions.None);
-        var values = inputs[inputs.Length - 1].Split('&');
-        var num1 = int.Parse(values[0].Split('=')[1]);
-        var num2 = int.Parse(values[1].Split('=')[1]);
-        var sum = num1 + num2;
-
-        httpBody = $"<html><h1>Result: {sum}</h1></html>";
+        var expression = inputs[inputs.Length - 1].Split('=')[1];
+        var result = CalculateResult(expression);
+        httpBody = $"<html><form method='post' action='http://127.0.0.1:13000'>" +
+                    $"<input type='text' id='result' name='result' value='{result}' readonly><br>" +
+                  "<input type='button' value='1' onclick=\"document.getElementById('result').value += '1'\">" +
+                   "<input type='button' value='2' onclick=\"document.getElementById('result').value += '2'\">" +
+                   "<input type='button' value='3' onclick=\"document.getElementById('result').value += '3'\"><br>" +
+                   "<input type='button' value='4' onclick=\"document.getElementById('result').value += '4'\">" +
+                   "<input type='button' value='5' onclick=\"document.getElementById('result').value += '5'\">" +
+                   "<input type='button' value='6' onclick=\"document.getElementById('result').value += '6'\"><br>" +
+                   "<input type='button' value='7' onclick=\"document.getElementById('result').value += '7'\">" +
+                   "<input type='button' value='8' onclick=\"document.getElementById('result').value += '8'\">" +
+                   "<input type='button' value='9' onclick=\"document.getElementById('result').value += '9'\"><br>" +
+                   "<input type='button' value='+' onclick=\"document.getElementById('result').value += '+'\">" +
+                   "<input type='button' value='-' onclick=\"document.getElementById('result').value += '-'\">" +
+                   "<input type='button' value='*' onclick=\"document.getElementById('result').value += '*'\"><br>" +
+                   "<input type='button' value='/' onclick=\"document.getElementById('result').value += '/'\">" +
+                   "<input type='button' value='C' onclick=\"document.getElementById('result').value = ''\"><br>" +
+                   "<input type='button' value='=' onclick='this.form.submit()'>" +
+                   "</form></html>";
       }
       else
       {
         httpBody = "<html><form method='post' action='http://127.0.0.1:13000'>" +
-                    "Number 1: <input type='text' name='num1'><br>" +
-                    "Number 2: <input type='text' name='num2'><br>" +
-                    "<input type='submit' value='Add'>" +
-                    "</form></html>";
+                   "<input type='text' id='result' name='result' readonly><br>" +
+                   "<input type='button' value='1' onclick=\"document.getElementById('result').value += '1'\">" +
+                   "<input type='button' value='2' onclick=\"document.getElementById('result').value += '2'\">" +
+                   "<input type='button' value='3' onclick=\"document.getElementById('result').value += '3'\"><br>" +
+                   "<input type='button' value='4' onclick=\"document.getElementById('result').value += '4'\">" +
+                   "<input type='button' value='5' onclick=\"document.getElementById('result').value += '5'\">" +
+                   "<input type='button' value='6' onclick=\"document.getElementById('result').value += '6'\"><br>" +
+                   "<input type='button' value='7' onclick=\"document.getElementById('result').value += '7'\">" +
+                   "<input type='button' value='8' onclick=\"document.getElementById('result').value += '8'\">" +
+                   "<input type='button' value='9' onclick=\"document.getElementById('result').value += '9'\"><br>" +
+                   "<input type='button' value='+' onclick=\"document.getElementById('result').value += '+'\">" +
+                   "<input type='button' value='-' onclick=\"document.getElementById('result').value += '-'\">" +
+                   "<input type='button' value='*' onclick=\"document.getElementById('result').value += '*'\"><br>" +
+                   "<input type='button' value='/' onclick=\"document.getElementById('result').value += '/'\">" +
+                   "<input type='button' value='C' onclick=\"document.getElementById('result').value = ''\"><br>" +
+                   "<input type='button' value='=' onclick='this.form.submit()'>" +
+                   "</form></html>";
       }
 
       httpResonse = "HTTP/1.0 200 OK" + Environment.NewLine
@@ -97,9 +124,40 @@ public class HttpServer : IHttpServer
       client.Close();
       Console.WriteLine("TcpClient closed");
 
-      Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+      Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
       Thread.Sleep(100);
     }
   }
+
+  private int CalculateResult(string expression)
+  {
+    expression = System.Net.WebUtility.UrlDecode(expression);
+    var tokens = expression.Split(new[] { '+', '-', '*', '/' });
+    var result = int.Parse(tokens[0]);
+    int j = tokens[0].Length;
+
+    for (int i = 1; i < tokens.Length; i++)
+    {
+      switch (expression[j])
+      {
+        case '+':
+          result += int.Parse(tokens[i]);
+          break;
+        case '-':
+          result -= int.Parse(tokens[i]);
+          break;
+        case '*':
+          result *= int.Parse(tokens[i]);
+          break;
+        case '/':
+          result /= int.Parse(tokens[i]);
+          break;
+      }
+      j += tokens[i].Length + 1;
+    }
+
+    return result;
+  }
 }
+
