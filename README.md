@@ -33,7 +33,7 @@ The web-based calculator provides a simple interface with buttons for numbers an
 - Click buttons "5", "+", "3", and "=".
 - The result "8" is displayed in the result area.
 
-**Note:** Currently, the program supports basic arithmetic operations. Future enhancements might include functionalities like power calculations or square root extraction. **Section will Be Updated**
+**Note:** Currently, the program supports basic mathematic operations. Future enhancements might include functionalities like power calculations or square root extraction. **Section will Be Updated**
 
 ### Todays UseCase
 - **Updating Everyday**
