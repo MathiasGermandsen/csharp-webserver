@@ -37,8 +37,8 @@ The web-based calculator provides a simple interface with buttons for numbers an
 **Note:** Currently, the program supports basic arithmetic operations. Future enhancements might include functionalities like power calculations or square root extraction.
 
 ### Todays UseCase
-**Updating Everyday**
-Regne med + - * /
-Tilføje alle tal fra 0-9
-**New** Refaktorere kode (fjerne unødvendig kode)
-**New** Tilføje Potens/Kvadratrod
+- **Updating Everyday**
+- Regne med + - * /
+- Tilføje alle tal fra 0-9
+- **New** Refaktorere kode (fjerne unødvendig kode)
+- **New** Tilføje Potens/Kvadratrod
