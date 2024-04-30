@@ -35,30 +35,31 @@ public class HttpServer : IHttpServer
     while (true)
     {
       Console.WriteLine("Waiting for client {0}", i++);
-      var client = listener.AcceptTcpClient();
+      TcpClient client = listener.AcceptTcpClient();
       Console.WriteLine("TcpClient accepted");
 
-      var buffer = new byte[10240];
-      var stream = client.GetStream();
+      byte[] buffer = new byte[10240];
+      NetworkStream stream = client.GetStream();
       Console.WriteLine("Got Client Stream obj");
 
-      var length = stream.Read(buffer, 0, buffer.Length);
+      int length = stream.Read(buffer, 0, buffer.Length);
       Console.WriteLine("Read stream to buffer {0} bytes", length);
 
-      var incomingMessage = Encoding.UTF8.GetString(buffer, 0, length);
+      string incomingMessage = Encoding.UTF8.GetString(buffer, 0, length);
       Console.WriteLine("Buffer decoded to string:");
       Console.WriteLine("---------------------------------------------------------------");
       Console.WriteLine("Incoming message:");
       Console.WriteLine(incomingMessage);
 
-      var httpBody = string.Empty;
-      var httpResonse = string.Empty;
+      string httpBody = string.Empty;
+      string httpResonse = string.Empty;
 
       if (incomingMessage.StartsWith("POST"))
       {
-        var inputs = incomingMessage.Split(new[] { "\r\n" }, StringSplitOptions.None);
-        var expression = inputs[inputs.Length - 1].Split('=')[1];
-        var result = CalculateResult(expression);
+        string[] inputs = incomingMessage.Split(new[] { "\r\n" }, StringSplitOptions.None);
+        string expression = inputs[inputs.Length - 1].Split('=')[1];
+        int result = CalculateResult(expression);
+
         httpBody = $"<html><form method='post' action='http://127.0.0.1:13000'>" +
                     $"<input type='text' id='result' name='result' value='{result}' readonly><br>" +
                   "<input type='button' value='1' onclick=\"document.getElementById('result').value += '1'\">" +
@@ -113,16 +114,6 @@ public class HttpServer : IHttpServer
       Console.WriteLine("---------------------------------------------------------------");
 
       stream.Write(Encoding.UTF8.GetBytes(httpResonse));
-      Console.WriteLine("Response networkstream written");
-
-      stream.Flush();
-      Console.WriteLine("Response networkstream Flushed");
-
-      stream.Close();
-      Console.WriteLine("Response networkstream Closed");
-
-      client.Close();
-      Console.WriteLine("TcpClient closed");
 
       Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
@@ -133,8 +124,8 @@ public class HttpServer : IHttpServer
   private int CalculateResult(string expression)
   {
     expression = System.Net.WebUtility.UrlDecode(expression);
-    var tokens = expression.Split(new[] { '+', '-', '*', '/' });
-    var result = int.Parse(tokens[0]);
+    string[] tokens = expression.Split(new[] { '+', '-', '*', '/' });
+    int result = int.Parse(tokens[0]);
     int j = tokens[0].Length;
 
     for (int i = 1; i < tokens.Length; i++)
@@ -160,4 +151,3 @@ public class HttpServer : IHttpServer
     return result;
   }
 }
-
