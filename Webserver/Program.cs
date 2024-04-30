@@ -75,6 +75,8 @@ public class HttpServer : IHttpServer
                    "<input type='button' value='-' onclick=\"document.getElementById('result').value += '-'\">" +
                    "<input type='button' value='*' onclick=\"document.getElementById('result').value += '*'\"><br>" +
                    "<input type='button' value='/' onclick=\"document.getElementById('result').value += '/'\">" +
+                   "<input type='button' value='^' onclick=\"document.getElementById('result').value += '^'\">" +
+                   "<input type='button' value='sqrt' onclick=\"document.getElementById('result').value += 's'\">" +
                    "<input type='button' value='C' onclick=\"document.getElementById('result').value = ''\"><br>" +
                    "<input type='button' value='=' onclick='this.form.submit()'>" +
                    "</form></html>";
@@ -96,6 +98,8 @@ public class HttpServer : IHttpServer
                    "<input type='button' value='-' onclick=\"document.getElementById('result').value += '-'\">" +
                    "<input type='button' value='*' onclick=\"document.getElementById('result').value += '*'\"><br>" +
                    "<input type='button' value='/' onclick=\"document.getElementById('result').value += '/'\">" +
+                   "<input type='button' value='^' onclick=\"document.getElementById('result').value += '^'\">" +
+                   "<input type='button' value='sqrt' onclick=\"document.getElementById('result').value += 's'\">" +
                    "<input type='button' value='C' onclick=\"document.getElementById('result').value = ''\"><br>" +
                    "<input type='button' value='=' onclick='this.form.submit()'>" +
                    "</form></html>";
@@ -124,7 +128,7 @@ public class HttpServer : IHttpServer
   private int CalculateResult(string expression)
   {
     expression = System.Net.WebUtility.UrlDecode(expression);
-    string[] tokens = expression.Split(new[] { '+', '-', '*', '/' });
+    string[] tokens = expression.Split(new[] { '+', '-', '*', '/', '^', 's' });
     int result = int.Parse(tokens[0]);
     int j = tokens[0].Length;
 
@@ -143,6 +147,9 @@ public class HttpServer : IHttpServer
           break;
         case '/':
           result /= int.Parse(tokens[i]);
+          break;
+        case '^':
+          result = (int)Math.Pow(result, int.Parse(tokens[i]));
           break;
       }
       j += tokens[i].Length + 1;
