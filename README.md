@@ -1,4 +1,4 @@
-# Simple Web-based Calculator
+# Simple Web-server-based Calculator
 
 This project implements a simple web-based calculator using C#. It provides a user-friendly interface for basic arithmetic operations accessible through a web browser.
 
@@ -37,7 +37,7 @@ The web-based calculator provides a simple interface with buttons for numbers an
 
 ### Todays UseCase
 - **Updating Everyday**
-- Regne med + - * /
-- Tilføje alle tal fra 0-9
-- **New** Refaktorere kode (fjerne unødvendig kode)
-- **New** Tilføje Potens/Kvadratrod
+- Calculate with + - * /
+- Add all numbers from 0-9
+- **New** Refactor code (remove unnecessary code)
+- **New** Add Power math/Square Root
