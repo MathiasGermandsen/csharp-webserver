@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -61,7 +61,7 @@ public class HttpServer : IHttpServer
         int result = CalculateResult(expression);
 
         httpBody = $"<html><form method='post' action='http://127.0.0.1:13000'>" +
-                    $"<input type='text' id='result' name='result' value='{result}' readonly><br>" +
+                    $"<input type='text' id='result' name='result' value='{result.ToString("N")}' readonly><br>" +
                   "<input type='button' value='1' onclick=\"document.getElementById('result').value += '1'\">" +
                    "<input type='button' value='2' onclick=\"document.getElementById('result').value += '2'\">" +
                    "<input type='button' value='3' onclick=\"document.getElementById('result').value += '3'\"><br>" +
@@ -126,35 +126,43 @@ public class HttpServer : IHttpServer
   }
 
   private int CalculateResult(string expression)
-  {
-    expression = System.Net.WebUtility.UrlDecode(expression);
-    string[] tokens = expression.Split(new[] { '+', '-', '*', '/', '^', 's' });
-    int result = int.Parse(tokens[0]);
-    int j = tokens[0].Length;
-
-    for (int i = 1; i < tokens.Length; i++)
     {
-      switch (expression[j])
-      {
-        case '+':
-          result += int.Parse(tokens[i]);
-          break;
-        case '-':
-          result -= int.Parse(tokens[i]);
-          break;
-        case '*':
-          result *= int.Parse(tokens[i]);
-          break;
-        case '/':
-          result /= int.Parse(tokens[i]);
-          break;
-        case '^':
-          result = (int)Math.Pow(result, int.Parse(tokens[i]));
-          break;
-      }
-      j += tokens[i].Length + 1;
-    }
+            {
+                expression = System.Net.WebUtility.UrlDecode(expression);
+                string[] tokens = expression.Split(new[] { '+', '-', '*', '/', '^', 's' });
+                double result = double.Parse(tokens[0]);
+                int j = tokens[0].Length;
 
-    return result;
-  }
+                for (int i = 1; i < tokens.Length; i++)
+                {
+                    switch (expression[j])
+                    {
+                        case '+':
+                            result += double.Parse(tokens[i]);
+                            break;
+                        case '-':
+                            result -= double.Parse(tokens[i]);
+                            break;
+                        case '*':
+                            result *= double.Parse(tokens[i]);
+                            break;
+                        case '/':
+                            result /= double.Parse(tokens[i]);
+                            break;
+                        case '^':
+                            result = (double)Math.Pow(result, double.Parse(tokens[i]));
+                            break;
+                        case 's':
+                            double number = double.Parse(tokens[i]); // Use Math.Sqrt
+                            result = Math.Sqrt(number);
+                            break;
+                    }
+                    j += tokens[i].Length + 1;
+                }
+
+                return (int)result;
+            }
+        
+    }
+  
 }
